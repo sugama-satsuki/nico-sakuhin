@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にこのさくひん</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">
+        <span class="title-icon">🎨</span>
+        にこのさくひん
+        <span class="title-icon">✨</span>
+      </h1>
+      <p class="site-subtitle">みんなみてね！</p>
+    </div>
+    <div class="header-decoration"></div>
+  </header>
+
+  <main class="gallery-container">
+    <div class="gallery-grid" id="gallery">
+      <!-- 作品カードはJSで生成 -->
+    </div>
+  </main>
+
+  <!-- モーダル -->
+  <div class="modal-overlay" id="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="閉じる">&times;</button>
+      <div class="modal-image-wrapper">
+        <img src="" alt="" id="modalImage" class="modal-image">
+      </div>
+      <div class="modal-info">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-description" id="modalDescription"></p>
+        <p class="modal-date" id="modalDate"></p>
+        <div class="modal-stats">
+          <span class="stat-views" id="modalViews">👀 0</span>
+          <button class="like-button" id="modalLike">
+            <span class="like-icon">🤍</span>
+            <span class="like-count" id="modalLikeCount">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; にこのさくひん</p>
+  </footer>
+
+  <script src="works.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
