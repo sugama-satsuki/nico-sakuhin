@@ -562,6 +562,229 @@ body {
 }
 
 /* ========================================
+   作品投稿（アップロード）
+   ======================================== */
+
+.upload-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.upload-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--salmon) 0%, var(--purple) 100%);
+  box-shadow: 0 8px 24px var(--salmon-glow), 0 2px 8px var(--purple-glow);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+}
+
+.upload-trigger:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 32px var(--salmon-glow), 0 4px 12px var(--purple-glow);
+}
+
+.upload-trigger:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.upload-trigger:focus-visible {
+  outline: 3px solid var(--purple-dark);
+  outline-offset: 3px;
+}
+
+.upload-trigger-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* ---- 投稿パネル ---- */
+
+/*
+ * .modal-overlay は visibility もトランジションさせているため、開いた直後は
+ * まだ非表示扱いで入力欄にフォーカスを当てられない。
+ * 開くときは visibility を即時に、閉じるときはフェードアウト後に切り替える。
+ */
+.upload-overlay {
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.upload-overlay.active {
+  transition: opacity 0.4s ease, visibility 0s linear 0s;
+}
+
+.upload-content {
+  max-width: 560px;
+  padding: 2.5rem 1.8rem 2rem;
+}
+
+.upload-heading {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 0.6rem;
+  padding-right: 3rem;
+  background: linear-gradient(135deg, var(--salmon-dark), var(--purple-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.upload-lead {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.upload-lead strong {
+  color: var(--salmon-dark);
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.upload-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.upload-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upload-required {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--salmon-dark);
+}
+
+.upload-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid var(--purple-light);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.upload-input::placeholder {
+  color: #c3b2c1;
+}
+
+.upload-input:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 4px var(--purple-glow);
+}
+
+.upload-input[aria-invalid='true'] {
+  border-color: var(--salmon-dark);
+}
+
+.upload-input[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 4px var(--salmon-glow);
+}
+
+.upload-textarea {
+  resize: vertical;
+  min-height: 5.5rem;
+  line-height: 1.6;
+}
+
+.upload-counter {
+  align-self: flex-end;
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+.upload-errors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #b8434f;
+}
+
+/* display 指定は hidden 属性より強いので、明示的に打ち消す */
+.upload-errors[hidden] {
+  display: none;
+}
+
+.upload-errors li::before {
+  content: '⚠️ ';
+}
+
+.upload-submit {
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--salmon-dark) 100%);
+  box-shadow: 0 8px 24px var(--purple-glow);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+}
+
+.upload-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px var(--purple-glow);
+}
+
+.upload-submit:focus-visible {
+  outline: 3px solid var(--purple-dark);
+  outline-offset: 3px;
+}
+
+.upload-status {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(201, 167, 235, 0.16);
+  border: 1px solid rgba(164, 125, 212, 0.35);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--purple-dark);
+}
+
+.upload-note {
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+/* ========================================
    レスポンシブ
    ======================================== */
 
@@ -650,6 +873,25 @@ body {
 
   .header-wave svg {
     height: 30px;
+  }
+
+  .upload-trigger {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+
+  .upload-content {
+    padding: 2.2rem 1.2rem 1.6rem;
+  }
+
+  .upload-heading {
+    font-size: 1.2rem;
+  }
+
+  /* iOS でズームされないように 16px 以上を保つ */
+  .upload-input {
+    font-size: 1rem;
   }
 }
 

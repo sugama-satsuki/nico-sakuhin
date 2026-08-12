@@ -2,6 +2,7 @@ import { getViews, getLikes, isLiked, toggleLike } from './lib/storage.js';
 import { formatDate, getPlaceholder } from './lib/helpers.js';
 import { createCard } from './lib/gallery.js';
 import { openModal, closeModal, getModalDOM, setGalleryElement } from './lib/modal.js';
+import { initUploadForm } from './lib/uploadForm.js';
 
 (() => {
   const gallery = document.getElementById('gallery');
@@ -189,4 +190,7 @@ import { openModal, closeModal, getModalDOM, setGalleryElement } from './lib/mod
   }
 
   init();
+
+  // ---- 作品投稿フォーム ----
+  initUploadForm();
 })();
