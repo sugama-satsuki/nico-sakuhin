@@ -1,0 +1,14 @@
+{
+  "name": "nico-sakuhin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "jsdom": "^29.0.1",
+    "vitest": "^4.1.0"
+  }
+}
